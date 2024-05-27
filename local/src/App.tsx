@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { SideBar } from './components/SideBar.tsx'
 
 import { useSelector } from 'react-redux'
+import { SideBar } from './components/SideBar.tsx'
 import { Home, Login, NotFound, Register, Settings } from './pages'
 import { selectIsAuth } from './redux/slices/auth.ts'
 
@@ -11,8 +11,8 @@ export const App: React.FC = () => {
 
 	return (
 		<>
-			{/* {isAuth ? <SideBar /> : <Navigate to='/login' />} */}
-			{isAuth ? <SideBar /> : null}
+			{isAuth ? <SideBar /> : ''}
+			{/* <SideBar /> */}
 			<Routes>
 				<Route path='/login' element={<Login />} />
 				<Route path='/register' element={<Register />} />
