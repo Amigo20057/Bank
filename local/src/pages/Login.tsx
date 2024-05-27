@@ -4,7 +4,7 @@ import styles from '../module/Login.module.scss'
 // import { Navigate } from 'react-router-dom'
 
 export const Login: React.FC = () => {
-	const isAuth: boolean = true
+	// const isAuth: boolean = true
 
 	// if (isAuth) {
 	// 	return <Navigate to='/' />

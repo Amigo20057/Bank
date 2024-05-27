@@ -9,7 +9,7 @@ import {
 } from 'lucide-react'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from '../module/SideBar.module.scss'
 import { logout, selectIsAuth } from '../redux/slices/auth'
 
@@ -17,11 +17,13 @@ export const SideBar: React.FC = () => {
 	const [active, setActive] = useState(1)
 	const isAuth = useSelector(selectIsAuth)
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const onClickLogout = () => {
 		if (window.confirm('Ви впевнені, що хочете вийти?')) {
 			dispatch(logout())
 			window.localStorage.removeItem('token')
+			navigate('/login')
 		}
 	}
 

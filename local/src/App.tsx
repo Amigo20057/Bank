@@ -7,10 +7,11 @@ import { Home, Login, NotFound, Register, Settings } from './pages'
 import { selectIsAuth } from './redux/slices/auth.ts'
 
 export const App: React.FC = () => {
-	const isAuth = useSelector(selectIsAuth)
+	const isAuth: boolean = useSelector(selectIsAuth)
 
 	return (
 		<>
+			{/* {isAuth ? <SideBar /> : <Navigate to='/login' />} */}
 			{isAuth ? <SideBar /> : null}
 			<Routes>
 				<Route path='/login' element={<Login />} />
