@@ -2,10 +2,12 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { SideBar } from './components/SideBar.tsx'
 
+import { useSelector } from 'react-redux'
 import { Home, Login, NotFound, Register, Settings } from './pages'
+import { selectIsAuth } from './redux/slices/auth.ts'
 
 export const App: React.FC = () => {
-	const isAuth = true
+	const isAuth = useSelector(selectIsAuth)
 
 	return (
 		<>

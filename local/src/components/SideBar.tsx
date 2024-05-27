@@ -8,11 +8,22 @@ import {
 	Settings,
 } from 'lucide-react'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styles from '../module/SideBar.module.scss'
+import { logout, selectIsAuth } from '../redux/slices/auth'
 
 export const SideBar: React.FC = () => {
 	const [active, setActive] = useState(1)
+	const isAuth = useSelector(selectIsAuth)
+	const dispatch = useDispatch()
+
+	const onClickLogout = () => {
+		if (window.confirm('Ви впевнені, що хочете вийти?')) {
+			dispatch(logout())
+			window.localStorage.removeItem('token')
+		}
+	}
 
 	return (
 		<div className={styles.sideBar}>
@@ -88,13 +99,9 @@ export const SideBar: React.FC = () => {
 					</li>
 					<li className={active === 8 ? styles.active : ''}>
 						<LogOut />
-						<Link
-							style={{ marginLeft: '15px' }}
-							onClick={() => setActive(8)}
-							to='/logout'
-						>
+						<button style={{ marginLeft: '15px' }} onClick={onClickLogout}>
 							Вийти
-						</Link>
+						</button>
 					</li>
 				</ul>
 			</div>
