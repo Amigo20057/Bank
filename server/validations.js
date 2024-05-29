@@ -14,3 +14,11 @@ export const loginValidation = [
 		min: 5,
 	}),
 ]
+
+export const cardCreateValidaion = [
+	body('cardNumber', 'Invalid Card Number').isLength({ min: 16 }),
+	body('month', 'Invalid Month').isLength({ min: 2 }),
+	body('year', 'Invalid Year').isLength({ min: 2 }),
+	body('cvv', 'Invalid CVV').isLength({ min: 3 }),
+	// body('balance', 'Invalid Money').isNumeric(),
+]

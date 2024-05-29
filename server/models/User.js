@@ -15,9 +15,9 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		balance: {
-			type: Number,
-		},
+		// balance: {
+		// 	type: Number,
+		// },
 	},
 	{
 		timestamps: true,

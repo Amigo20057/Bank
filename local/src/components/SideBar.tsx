@@ -94,7 +94,7 @@ export const SideBar: React.FC = () => {
 						<Link
 							style={{ marginLeft: '15px' }}
 							onClick={() => setActive(7)}
-							to='/supports'
+							to='/support'
 						>
 							Допомога
 						</Link>
