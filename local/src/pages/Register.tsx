@@ -5,25 +5,14 @@ import { Link, Navigate } from 'react-router-dom'
 import styles from '../module/Register.module.scss'
 import { fetchRegister, selectIsAuth } from '../redux/slices/auth'
 
-interface FormValues {
-	fullName: string
-	email: string
-	password: string
-}
-
-interface Payload {
-	token?: string
-}
+import { AppDispatch } from '../redux/store'
+import { FormValues, Payload } from '../types/authTypes'
 
 export const Register: React.FC = () => {
 	const isAuth: boolean = useSelector(selectIsAuth)
-	const dispatch = useDispatch()
+	const dispatch: AppDispatch = useDispatch<AppDispatch>()
 
-	const {
-		register,
-		handleSubmit,
-		// formState: { errors, isValid },
-	} = useForm<FormValues>({
+	const { register, handleSubmit } = useForm<FormValues>({
 		defaultValues: {
 			fullName: '',
 			email: '',
@@ -37,8 +26,11 @@ export const Register: React.FC = () => {
 		if (!data.payload) {
 			return alert('Не вдалося зареєструватися')
 		}
-		if ('token' in data.payload) {
-			window.localStorage.setItem('token', data.payload.token)
+		const payload = data.payload as Payload
+		if (payload.token) {
+			window.localStorage.setItem('token', payload.token)
+		} else {
+			alert('Токен відсутній')
 		}
 	}
 
@@ -72,7 +64,7 @@ export const Register: React.FC = () => {
 							color: 'var(--main-color)',
 							position: 'relative',
 							// left: '150px',
-							marginTop: '20px',
+							marginTop: '45px',
 						}}
 						to='/login'
 					>

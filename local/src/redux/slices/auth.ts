@@ -1,14 +1,19 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from '../../axios.ts'
 
-export const fetchAuth = createAsyncThunk('auth/fetchAuth', async params => {
-	const { data } = await axios.post('/auth/login', params)
-	return data
-})
+import { AuthState, FormValues } from '../../types/authTypes.ts'
+
+export const fetchAuth = createAsyncThunk(
+	'auth/fetchAuth',
+	async (params: FormValues) => {
+		const { data } = await axios.post('/auth/login', params)
+		return data
+	}
+)
 
 export const fetchRegister = createAsyncThunk(
 	'auth/fetchRegister',
-	async params => {
+	async (params: FormValues) => {
 		const { data } = await axios.post('/auth/register', params)
 		return data
 	}
@@ -19,7 +24,7 @@ export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
 	return data
 })
 
-const initialState = {
+const initialState: AuthState = {
 	data: null,
 	status: 'loading',
 }
@@ -38,36 +43,43 @@ const authSlice = createSlice({
 				state.status = 'loading'
 				state.data = null
 			})
-			.addCase(fetchAuth.fulfilled, (state, action) => {
-				state.status = 'loaded'
-				state.data = action.payload
-			})
+			.addCase(
+				fetchAuth.fulfilled,
+				(state, action: PayloadAction<{ token?: string }>) => {
+					state.status = 'loaded'
+					state.data = action.payload
+				}
+			)
 			.addCase(fetchAuth.rejected, state => {
 				state.status = 'error'
 				state.data = null
 			})
-
 			.addCase(fetchAuthMe.pending, state => {
 				state.status = 'loading'
 				state.data = null
 			})
-			.addCase(fetchAuthMe.fulfilled, (state, action) => {
-				state.status = 'loaded'
-				state.data = action.payload
-			})
+			.addCase(
+				fetchAuthMe.fulfilled,
+				(state, action: PayloadAction<{ token?: string }>) => {
+					state.status = 'loaded'
+					state.data = action.payload
+				}
+			)
 			.addCase(fetchAuthMe.rejected, state => {
 				state.status = 'error'
 				state.data = null
 			})
-
 			.addCase(fetchRegister.pending, state => {
 				state.status = 'loading'
 				state.data = null
 			})
-			.addCase(fetchRegister.fulfilled, (state, action) => {
-				state.status = 'loaded'
-				state.data = action.payload
-			})
+			.addCase(
+				fetchRegister.fulfilled,
+				(state, action: PayloadAction<{ token?: string }>) => {
+					state.status = 'loaded'
+					state.data = action.payload
+				}
+			)
 			.addCase(fetchRegister.rejected, state => {
 				state.status = 'error'
 				state.data = null
@@ -75,9 +87,8 @@ const authSlice = createSlice({
 	},
 })
 
-export const selectIsAuth = state => {
-	return Boolean(state.auth.data)
-}
+export const selectIsAuth = (state: { auth: AuthState }) =>
+	Boolean(state.auth.data)
 
 export const authReducer = authSlice.reducer
 

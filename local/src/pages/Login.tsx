@@ -1,19 +1,17 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import styles from '../module/Login.module.scss'
 import { fetchAuth, selectIsAuth } from '../redux/slices/auth'
 
+import { AppDispatch } from '../redux/store'
+import { FormValues, Payload } from '../types/authTypes'
+
 export const Login: React.FC = () => {
 	const isAuth: boolean = useSelector(selectIsAuth)
-	const dispatch = useDispatch()
-	const {
-		register,
-		handleSubmit,
-		// setError,
-		// formState: { errors, isValid },
-	} = useForm({
+	const dispatch = useDispatch<AppDispatch>()
+	const { register, handleSubmit } = useForm<FormValues>({
 		defaultValues: {
 			email: '',
 			password: '',
@@ -21,13 +19,14 @@ export const Login: React.FC = () => {
 		mode: 'onChange',
 	})
 
-	const onSubmit = async values => {
+	const onSubmit: SubmitHandler<FormValues> = async values => {
 		const data = await dispatch(fetchAuth(values))
 		if (!data.payload) {
 			return alert('Не вдалося авторизуватись')
 		}
-		if ('token' in data.payload) {
-			window.localStorage.setItem('token', data.payload.token)
+		const payload = data.payload as Payload
+		if (payload.token) {
+			window.localStorage.setItem('token', payload.token)
 		}
 	}
 
