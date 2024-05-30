@@ -16,6 +16,7 @@ import { logout, selectIsAuth } from '../redux/slices/auth'
 export const SideBar: React.FC = () => {
 	const [active, setActive] = useState(1)
 	const isAuth = useSelector(selectIsAuth)
+	const userData = useSelector(state => state.auth.data)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
@@ -31,7 +32,7 @@ export const SideBar: React.FC = () => {
 		<div className={styles.sideBar}>
 			<div className={styles.profile}>
 				<div className={styles.avatar}></div>
-				<h3>Full Name</h3>
+				<h3>{userData.fullName}</h3>
 			</div>
 			<div className={styles.menu}>
 				<ul>

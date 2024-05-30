@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { SideBar } from './components/SideBar.tsx'
 import {
 	Attachment,
@@ -14,10 +14,15 @@ import {
 	Support,
 	Valuta,
 } from './pages/index.ts'
-import { selectIsAuth } from './redux/slices/auth.ts'
+import { fetchAuthMe, selectIsAuth } from './redux/slices/auth.ts'
 
 export const App: React.FC = () => {
 	const isAuth: boolean = useSelector(selectIsAuth)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(fetchAuthMe())
+	}, [])
 
 	return (
 		<>

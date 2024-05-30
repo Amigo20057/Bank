@@ -2,10 +2,15 @@ import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
 
-import { loginValidation, registerValidation } from './validations.js'
+import {
+	cardCreateValidation,
+	loginValidation,
+	registerValidation,
+} from './validations.js'
 
 import checkAuth from './utils/checkAuth.js'
 
+import * as CardController from './controllers/cardController.js'
 import * as UserController from './controllers/userController.js'
 import handleValidationErrors from './utils/handleValidationErrors.js'
 
@@ -37,6 +42,14 @@ app.post(
 	UserController.register
 )
 app.get('/auth/me', checkAuth, UserController.getMe)
+
+app.post(
+	'/createCard',
+	checkAuth,
+	cardCreateValidation,
+	handleValidationErrors,
+	CardController.create
+)
 
 app.listen(4444, err => {
 	if (err) {

@@ -15,7 +15,7 @@ export const loginValidation = [
 	}),
 ]
 
-export const cardCreateValidaion = [
+export const cardCreateValidation = [
 	body('cardNumber', 'Invalid Card Number').isLength({ min: 16 }),
 	body('month', 'Invalid Month').isLength({ min: 2 }),
 	body('year', 'Invalid Year').isLength({ min: 2 }),
