@@ -27,7 +27,6 @@ export const App: React.FC = () => {
 	return (
 		<>
 			{isAuth ? <SideBar /> : ''}
-			{/* <SideBar /> */}
 			<Routes>
 				<Route path='/login' element={<Login />} />
 				<Route path='/register' element={<Register />} />

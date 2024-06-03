@@ -15,9 +15,11 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		// balance: {
-		// 	type: Number,
-		// },
+		card: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Card',
+			// required: true,
+		},
 	},
 	{
 		timestamps: true,
