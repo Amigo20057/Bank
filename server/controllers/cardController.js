@@ -29,7 +29,23 @@ export const create = async (req, res) => {
 
 export const getCard = async (req, res) => {
 	try {
-		const card = await CardModel.findById(req.params.cardId)
+		const user = await UserModel.findById(req.userId)
+
+		if (!user) {
+			return res.status(404).json({
+				message: 'User not found',
+			})
+		}
+
+		const cardId = user.card
+
+		if (!cardId) {
+			return res.status(404).json({
+				message: 'Card not found',
+			})
+		}
+
+		const card = await CardModel.findById(cardId)
 
 		if (!card) {
 			return res.status(404).json({

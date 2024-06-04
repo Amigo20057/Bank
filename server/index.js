@@ -42,7 +42,7 @@ app.post(
 	UserController.register
 )
 app.get('/auth/me', checkAuth, UserController.getMe)
-app.get('/card/:cardId', checkAuth, CardController.getCard)
+app.get('/card', checkAuth, CardController.getCard)
 app.post(
 	'/createCard',
 	checkAuth,
