@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-
 import UserModel from '../models/User.js'
 
 export const register = async (req, res) => {
@@ -36,7 +35,7 @@ export const register = async (req, res) => {
 	} catch (err) {
 		console.log(err)
 		res.status(500).json({
-			message: 'failed to register',
+			message: 'Failed to register',
 		})
 	}
 }
@@ -57,7 +56,7 @@ export const login = async (req, res) => {
 		)
 
 		if (!isValidPass) {
-			return res.status(404).json({
+			return res.status(401).json({
 				message: 'Wrong login or password',
 			})
 		}
@@ -81,7 +80,7 @@ export const login = async (req, res) => {
 	} catch (err) {
 		console.log(err)
 		res.status(500).json({
-			message: 'failed to login',
+			message: 'Failed to login',
 		})
 	}
 }
@@ -91,7 +90,7 @@ export const getMe = async (req, res) => {
 		const user = await UserModel.findById(req.userId)
 
 		if (!user) {
-			res.status(404).json({
+			return res.status(404).json({
 				message: 'User not found',
 			})
 		}

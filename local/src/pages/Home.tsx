@@ -1,16 +1,17 @@
+import { Plus } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { selectIsAuth } from '../redux/slices/auth'
-
 import { Card } from '../components/Card'
 import styles from '../module/Home.module.scss'
-import { fetchCard } from '../redux/slices/card'
+import { selectIsAuth } from '../redux/slices/auth'
+import { createCard, fetchCard } from '../redux/slices/card'
+
 export const Home: React.FC = () => {
 	const isAuth: boolean = useSelector(selectIsAuth)
 	const dispatch = useDispatch()
-	const { card } = useSelector(state => state.card)
-	let data = card.items
+	const { cards } = useSelector(state => state.cards)
+	const data = cards.items
 
 	useEffect(() => {
 		dispatch(fetchCard())
@@ -20,17 +21,35 @@ export const Home: React.FC = () => {
 		return <Navigate to='/login' />
 	}
 
-	console.log(data.balance)
+	const handleCreateCard = () => {
+		dispatch(createCard())
+	}
 
 	return (
 		<div className={styles.home}>
-			<Card
-				_id={data._id}
-				numberCard={data.numberCard}
-				month={data.month}
-				year={data.year}
-				cvv={data.cvv}
-			/>
+			<div className={styles.cards}>
+				<h2 className={styles.myCards}>Мої карти</h2>
+				<div>
+					{data.length > 0 ? (
+						data.map(card => (
+							<Card
+								key={card._id}
+								_id={card._id}
+								cardNumber={card.cardNumber}
+								balance={card.balance}
+								month={card.month}
+								year={card.year}
+								cvv={card.cvv}
+							/>
+						))
+					) : (
+						<p>No cards found</p>
+					)}
+					<div className={styles.createCard} onClick={handleCreateCard}>
+						<Plus size={48} />
+					</div>
+				</div>
+			</div>
 		</div>
 	)
 }

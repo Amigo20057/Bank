@@ -16,9 +16,16 @@ export const loginValidation = [
 ]
 
 export const cardCreateValidation = [
-	body('cardNumber', 'Invalid Card Number').isLength({ min: 16 }),
-	body('month', 'Invalid Month').isLength({ min: 2 }),
-	body('year', 'Invalid Year').isLength({ min: 2 }),
-	body('cvv', 'Invalid CVV').isLength({ min: 3 }),
-	// body('balance', 'Invalid Money').isNumeric(),
+	body('cardNumber')
+		.isLength({ min: 16, max: 16 })
+		.withMessage('Invalid Card Number')
+		.isNumeric()
+		.withMessage('Card Number must be numeric'),
+	body('month')
+		.isInt({ min: 1, max: 12 })
+		.withMessage('Invalid Month')
+		.custom(value => value.length === 2)
+		.withMessage('Month must be 2 digits'),
+	body('year').isInt({ min: 0, max: 99 }).withMessage('Invalid Year'),
+	body('cvv').isInt({ min: 100, max: 999 }).withMessage('Invalid CVV'),
 ]

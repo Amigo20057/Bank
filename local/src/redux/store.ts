@@ -5,7 +5,7 @@ import { cardReducer } from './slices/card'
 const store = configureStore({
 	reducer: {
 		auth: authReducer,
-		card: cardReducer,
+		cards: cardReducer,
 	},
 })
 

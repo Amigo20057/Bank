@@ -6,3 +6,30 @@
 	margin-top: 50px;
 	border-radius: 40px;
 }
+
+.cards {
+	width: 100%;
+	height: 43%;
+	/* display: flex;
+	justify-content: center;
+	flex-direction: column; */
+
+	.myCards {
+		margin-bottom: 20px;
+	}
+
+	& > div {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.createCard {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 80px;
+	height: 80px;
+	border-radius: 100%;
+	border: 1px solid #fff;
+}

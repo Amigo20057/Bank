@@ -47,7 +47,7 @@ app.post(
 	'/createCard',
 	checkAuth,
 	cardCreateValidation,
-	handleValidationErrors,
+	// handleValidationErrors,
 	CardController.create
 )
 
