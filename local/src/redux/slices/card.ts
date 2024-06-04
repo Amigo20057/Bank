@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../../axios'
 
-export const fetchCard = createAsyncThunk('card/fetchCard', async id => {
-	const { data } = await axios.get(`/card/${id}`)
+export const fetchCard = createAsyncThunk('card/fetchCard', async () => {
+	const { data } = await axios.get(`/card`)
 	return data
 })
 
 const initialState = {
-	cards: {
+	card: {
 		items: [],
 		status: 'loading',
 	},
@@ -20,16 +20,16 @@ const cardSlice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(fetchCard.pending, state => {
-				state.cards.items = []
-				state.cards.status = 'loading'
+				state.card.items = []
+				state.card.status = 'loading'
 			})
 			.addCase(fetchCard.fulfilled, (state, action) => {
-				state.cards.items = action.payload
-				state.cards.status = 'idle'
+				state.card.items = action.payload
+				state.card.status = 'idle'
 			})
 			.addCase(fetchCard.rejected, state => {
-				state.cards.items = []
-				state.cards.status = 'error'
+				state.card.items = []
+				state.card.status = 'error'
 			})
 	},
 })
