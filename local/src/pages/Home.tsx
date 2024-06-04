@@ -30,21 +30,19 @@ export const Home: React.FC = () => {
 			<div className={styles.cards}>
 				<h2 className={styles.myCards}>Мої карти</h2>
 				<div>
-					{data.length > 0 ? (
-						data.map(card => (
-							<Card
-								key={card._id}
-								_id={card._id}
-								cardNumber={card.cardNumber}
-								balance={card.balance}
-								month={card.month}
-								year={card.year}
-								cvv={card.cvv}
-							/>
-						))
-					) : (
-						<p>No cards found</p>
-					)}
+					{data.length > 0
+						? data.map(card => (
+								<Card
+									key={card._id}
+									_id={card._id}
+									cardNumber={card.cardNumber}
+									balance={card.balance}
+									month={card.month}
+									year={card.year}
+									cvv={card.cvv}
+								/>
+						  ))
+						: ''}
 					<div className={styles.createCard} onClick={handleCreateCard}>
 						<Plus size={48} />
 					</div>
