@@ -14,6 +14,14 @@ export const createCard = createAsyncThunk(
 	}
 )
 
+export const deleteCard = createAsyncThunk(
+	'card/deleteCard',
+	async ({ cardNumber, cvv }) => {
+		const { data } = await axios.post('/deleteCard', { cardNumber, cvv })
+		return data
+	}
+)
+
 const initialState = {
 	cards: {
 		items: [],
@@ -39,6 +47,7 @@ const cardSlice = createSlice({
 				state.cards.items = []
 				state.cards.status = 'error'
 			})
+
 			.addCase(createCard.pending, state => {
 				state.cards.status = 'loading'
 			})
@@ -47,6 +56,19 @@ const cardSlice = createSlice({
 				state.cards.status = 'idle'
 			})
 			.addCase(createCard.rejected, state => {
+				state.cards.status = 'error'
+			})
+
+			.addCase(deleteCard.pending, state => {
+				state.cards.status = 'loading'
+			})
+			.addCase(deleteCard.fulfilled, (state, action) => {
+				state.cards.items = state.cards.items.filter(
+					card => card._id !== action.payload._id
+				)
+				state.cards.status = 'idle'
+			})
+			.addCase(deleteCard.rejected, state => {
 				state.cards.status = 'error'
 			})
 	},

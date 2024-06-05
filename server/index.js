@@ -45,7 +45,7 @@ app.get('/auth/me', checkAuth, UserController.getMe)
 
 app.get('/card', checkAuth, CardController.getCard)
 app.post('/createCard', checkAuth, cardCreateValidation, CardController.create)
-app.delete('/deleteCard', checkAuth, CardController.deleteCard)
+app.post('/deleteCard', checkAuth, CardController.deleteCard)
 
 app.listen(4444, err => {
 	if (err) {

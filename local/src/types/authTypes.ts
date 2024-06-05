@@ -4,6 +4,11 @@ export interface FormValues {
 	password: string
 }
 
+export interface FormDelete {
+	cardNumber: string
+	cvv: string
+}
+
 export interface Payload {
 	token?: string
 }
