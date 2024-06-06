@@ -70,7 +70,7 @@ export const MoneyTransfer: React.FC = () => {
 							<option value=''>-- Виберіть карту --</option>
 							{cards.items.map(card => (
 								<option key={card._id} value={card.cardNumber}>
-									{card.cardNumber} (Баланс: {card.balance})
+									{card.cardNumber} (Баланс: {card.balance} $)
 								</option>
 							))}
 						</select>

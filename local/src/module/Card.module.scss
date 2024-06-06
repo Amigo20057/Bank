@@ -5,6 +5,8 @@
 	background-color: #393939;
 	border-radius: 20px;
 	margin-right: 70px;
+	transition: 0.25s;
+	transform: perspective(600px) rotateY(0);
 
 	.date {
 		width: 100%;
@@ -32,6 +34,8 @@
 	border-radius: 20px;
 	display: flex;
 	align-items: flex-end;
+	transition: 0.25s;
+	transform: perspective(600px) rotateY(180deg);
 }
 
 .reverse > div {
@@ -45,6 +49,7 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: 5px;
+	transform: perspective(600px) rotateY(180deg);
 	background-color: #464b4f;
 
 	& h4 {
@@ -73,10 +78,11 @@
 	height: 20px;
 
 	& h3 {
-		width: 54%;
+		width: 59%;
 		font-weight: 200;
 		user-select: none;
 		transition: 0.25s;
+		text-align: center;
 
 		&:hover {
 			background-color: #464b4f;
