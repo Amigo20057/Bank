@@ -159,6 +159,15 @@ export const moneyTransfer = async (req, res) => {
 		cardFirstUser.balance -= money
 		cardSecondUser.balance += money
 
+		const transfer = {
+			senderCardNumber: cardNumberFirstUser,
+			recipientCardNumber: cardNumberSecondUser,
+			amount: money,
+		}
+
+		await cardFirstUser.addTransfer(transfer)
+		await cardSecondUser.addTransfer(transfer)
+
 		await cardFirstUser.save()
 		await cardSecondUser.save()
 
