@@ -22,10 +22,21 @@ export const deleteCard = createAsyncThunk(
 	}
 )
 
+export const moneyTransfer = createAsyncThunk(
+	'transfer/moneyTransfer',
+	async transferData => {
+		const { data } = await axios.patch('/moneyTransfer', transferData)
+		return data
+	}
+)
+
 const initialState = {
 	cards: {
 		items: [],
 		status: 'loading',
+	},
+	transfer: {
+		status: 'idle',
 	},
 }
 
@@ -70,6 +81,16 @@ const cardSlice = createSlice({
 			})
 			.addCase(deleteCard.rejected, state => {
 				state.cards.status = 'error'
+			})
+
+			.addCase(moneyTransfer.pending, state => {
+				state.transfer.status = 'loading'
+			})
+			.addCase(moneyTransfer.fulfilled, (state, action) => {
+				state.transfer.status = 'succeeded'
+			})
+			.addCase(moneyTransfer.rejected, state => {
+				state.transfer.status = 'failed'
 			})
 	},
 })

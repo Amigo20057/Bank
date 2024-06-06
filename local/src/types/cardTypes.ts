@@ -6,3 +6,10 @@ export interface ICard {
 	year: string
 	cvv: number
 }
+
+export interface ITransferMoneyForm {
+	cardNumberFirstUser: string
+	cvv: string
+	cardNumberSecondUser: string
+	money: string
+}

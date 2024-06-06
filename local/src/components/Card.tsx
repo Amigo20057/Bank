@@ -15,6 +15,7 @@ export const Card: React.FC<ICard> = ({
 
 	const handleTextClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation()
+		navigator.clipboard.writeText(cardNumber)
 	}
 
 	return (

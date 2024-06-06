@@ -46,6 +46,7 @@ app.get('/auth/me', checkAuth, UserController.getMe)
 app.get('/card', checkAuth, CardController.getCard)
 app.post('/createCard', checkAuth, cardCreateValidation, CardController.create)
 app.post('/deleteCard', checkAuth, CardController.deleteCard)
+app.patch('/moneyTransfer', checkAuth, CardController.moneyTransfer)
 
 app.listen(4444, err => {
 	if (err) {

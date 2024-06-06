@@ -1,5 +1,5 @@
 .home {
-	width: 83%;
+	width: 78%;
 	height: 90vh;
 	padding: 50px;
 	background-color: var(--main-color);
@@ -10,12 +10,10 @@
 .cards {
 	width: 100%;
 	height: 43%;
-	/* display: flex;
-	justify-content: center;
-	flex-direction: column; */
 
 	.myCards {
 		margin-bottom: 20px;
+		font-weight: 400;
 	}
 
 	& > div {
@@ -32,4 +30,35 @@
 	height: 80px;
 	border-radius: 100%;
 	border: 1px solid #fff;
+}
+
+.payments {
+	width: 100%;
+	height: 32%;
+	margin-bottom: 30px;
+
+	& h2 {
+		font-weight: 400;
+	}
+}
+
+.operation {
+	width: 100%;
+	height: 23%;
+
+	& h2 {
+		font-weight: 400;
+	}
+
+	& button {
+		margin: 15px;
+		width: 70px;
+		height: 70px;
+		background-color: #393939;
+		border: 2px solid #000;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }

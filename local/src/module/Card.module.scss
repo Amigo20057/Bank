@@ -73,6 +73,13 @@
 	height: 20px;
 
 	& h3 {
+		width: 54%;
 		font-weight: 200;
+		user-select: none;
+		transition: 0.25s;
+
+		&:hover {
+			background-color: #464b4f;
+		}
 	}
 }

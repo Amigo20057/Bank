@@ -112,3 +112,59 @@ export const deleteCard = async (req, res) => {
 		})
 	}
 }
+
+export const moneyTransfer = async (req, res) => {
+	try {
+		const { cvv, cardNumberFirstUser, cardNumberSecondUser, money } = req.body
+		const firstUser = await UserModel.findById(req.userId).populate('cards')
+
+		if (!firstUser) {
+			return res.status(404).json({
+				message: 'User not found',
+			})
+		}
+
+		const cardFirstUser = firstUser.cards.find(
+			card => card.cardNumber === cardNumberFirstUser && card.cvv === cvv
+		)
+
+		if (!cardFirstUser) {
+			return res.status(404).json({
+				message: 'Card not found',
+			})
+		}
+
+		const cardSecondUser = await CardModel.findOne({
+			cardNumber: cardNumberSecondUser,
+		})
+
+		if (!cardSecondUser) {
+			return res.status(404).json({
+				message: 'Recipient card not found',
+			})
+		}
+
+		if (cardFirstUser.balance < money) {
+			return res.status(400).json({
+				message: 'Insufficient funds',
+			})
+		}
+
+		cardFirstUser.balance -= money
+		cardSecondUser.balance += money
+
+		await cardFirstUser.save()
+		await cardSecondUser.save()
+
+		return res.json({
+			message: 'Money transferred successfully',
+			cardFirstUser,
+			cardSecondUser,
+		})
+	} catch (err) {
+		console.log(err)
+		return res.status(500).json({
+			message: 'Error transferring money',
+		})
+	}
+}
