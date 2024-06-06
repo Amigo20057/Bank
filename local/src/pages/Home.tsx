@@ -43,9 +43,11 @@ export const Home: React.FC = () => {
 								/>
 						  ))
 						: ''}
-					<div className={styles.createCard} onClick={handleCreateCard}>
-						<Plus size={48} />
-					</div>
+					{data.length < 3 && (
+						<div className={styles.createCard} onClick={handleCreateCard}>
+							<Plus size={48} />
+						</div>
+					)}
 				</div>
 			</div>
 			<div className={styles.payments}>

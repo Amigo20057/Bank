@@ -150,6 +150,12 @@ export const moneyTransfer = async (req, res) => {
 			})
 		}
 
+		if (money <= 0) {
+			return res.status(400).json({
+				message: 'Negative money',
+			})
+		}
+
 		cardFirstUser.balance -= money
 		cardSecondUser.balance += money
 

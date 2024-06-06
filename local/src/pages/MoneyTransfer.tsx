@@ -1,3 +1,4 @@
+import { ChevronLeft } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
@@ -50,8 +51,15 @@ export const MoneyTransfer: React.FC = () => {
 	return (
 		<div className={styles.windowTransfer}>
 			<div className={styles.container}>
+				<ChevronLeft
+					size={34}
+					style={{ position: 'absolute', left: '30px', top: '25px' }}
+					onClick={() => {
+						setRedirect(true)
+					}}
+				/>
 				<h1>Переказ</h1>
-				<form onSubmit={handleSubmit(onSubmit)}>
+				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 					<div className={styles.formGroup}>
 						<label>Виберіть вашу карту</label>
 						<select
