@@ -2,6 +2,7 @@ import { Banknote, Plus } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
+import { Chart } from '../UI/Chart'
 import { Card } from '../components/Card'
 import styles from '../module/Home.module.scss'
 import { selectIsAuth } from '../redux/slices/auth'
@@ -25,6 +26,23 @@ export const Home: React.FC = () => {
 	const handleCreateCard = () => {
 		dispatch(createCard())
 	}
+
+	const calculateTotals = () => {
+		let received = 0
+		let spent = 0
+		data.forEach(card => {
+			card.transfers.forEach(transfer => {
+				if (card.cardNumber === transfer.senderCardNumber) {
+					spent += transfer.amount
+				} else {
+					received += transfer.amount
+				}
+			})
+		})
+		return { received, spent }
+	}
+
+	const { received, spent } = calculateTotals()
 
 	return (
 		<div className={styles.home}>
@@ -76,20 +94,25 @@ export const Home: React.FC = () => {
 						})
 					)}
 					<button onClick={() => setFullTransfers(!fullTransfers)}>
-						{!fullTransfers ? 'Детальніше' : 'Закрити'}
+						{!fullTransfers ? 'Усі' : 'Закрити'}
 					</button>
 				</ul>
 			</div>
 			<div className={styles.operation}>
 				<h2>Операції</h2>
 				<div>
-					<Link to='/moneyTransfer'>
-						<button>
+					<button>
+						<Link to='/moneyTransfer'>
 							<Banknote size={34} color='#fff' />
-						</button>
-					</Link>
+						</Link>
+					</button>
 				</div>
 			</div>
+			{received != 0 && (
+				<div className={styles.chart}>
+					<Chart received={received} spent={spent} />
+				</div>
+			)}
 		</div>
 	)
 }
