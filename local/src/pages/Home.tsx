@@ -1,5 +1,5 @@
 import { Banknote, Plus } from 'lucide-react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import { Card } from '../components/Card'
@@ -12,6 +12,7 @@ export const Home: React.FC = () => {
 	const dispatch = useDispatch()
 	const { cards } = useSelector(state => state.cards)
 	const data = cards.items
+	const [fullTransfers, setFullTransfers] = useState(false)
 
 	useEffect(() => {
 		dispatch(fetchCard())
@@ -52,6 +53,32 @@ export const Home: React.FC = () => {
 			</div>
 			<div className={styles.payments}>
 				<h2>Платежі</h2>
+				<ul className={fullTransfers ? styles.fullTransfers : ''}>
+					{data.map(card =>
+						card.transfers.map((transfer, index) => {
+							const isSent = card.cardNumber === transfer.senderCardNumber
+							return (
+								<li
+									key={index}
+									className={isSent ? styles.sent : styles.received}
+								>
+									<span className={isSent ? styles.minus : styles.plus}>
+										{isSent ? '-' : '+'}
+									</span>
+									{transfer.amount} $
+									<span>
+										{isSent
+											? ' Зі своєї карти'
+											: ` від ${transfer.senderCardNumber}`}
+									</span>
+								</li>
+							)
+						})
+					)}
+					<button onClick={() => setFullTransfers(!fullTransfers)}>
+						{!fullTransfers ? 'Детальніше' : 'Закрити'}
+					</button>
+				</ul>
 			</div>
 			<div className={styles.operation}>
 				<h2>Операції</h2>
