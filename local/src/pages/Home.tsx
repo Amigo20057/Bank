@@ -44,6 +44,16 @@ export const Home: React.FC = () => {
 
 	const { received, spent } = calculateTotals()
 
+	const allTransfers = data.reduce((acc, card) => {
+		const cardTransfers = card.transfers.map(transfer => ({
+			...transfer,
+			cardNumber: card.cardNumber,
+		}))
+		return acc.concat(cardTransfers)
+	}, [])
+
+	allTransfers.sort((a, b) => new Date(b.date) - new Date(a.date))
+
 	return (
 		<div className={styles.home}>
 			<div className={styles.cards}>
@@ -72,27 +82,25 @@ export const Home: React.FC = () => {
 			<div className={styles.payments}>
 				<h2>Платежі</h2>
 				<ul className={fullTransfers ? styles.fullTransfers : ''}>
-					{data.map(card =>
-						card.transfers.map((transfer, index) => {
-							const isSent = card.cardNumber === transfer.senderCardNumber
-							return (
-								<li
-									key={index}
-									className={isSent ? styles.sent : styles.received}
-								>
-									<span className={isSent ? styles.minus : styles.plus}>
-										{isSent ? '-' : '+'}
-									</span>
-									{transfer.amount} $
-									<span>
-										{isSent
-											? ' Зі своєї карти'
-											: ` від ${transfer.senderCardNumber}`}
-									</span>
-								</li>
-							)
-						})
-					)}
+					{allTransfers.map((transfer, index) => {
+						const isSent = transfer.cardNumber === transfer.senderCardNumber
+						return (
+							<li
+								key={index}
+								className={isSent ? styles.sent : styles.received}
+							>
+								<span className={isSent ? styles.minus : styles.plus}>
+									{isSent ? '-' : '+'}
+								</span>
+								{transfer.amount} $
+								<span>
+									{isSent
+										? ' Зі своєї карти'
+										: ` від ${transfer.senderCardNumber}`}
+								</span>
+							</li>
+						)
+					})}
 					<button onClick={() => setFullTransfers(!fullTransfers)}>
 						{!fullTransfers ? 'Усі' : 'Закрити'}
 					</button>
@@ -108,7 +116,7 @@ export const Home: React.FC = () => {
 					</button>
 				</div>
 			</div>
-			{received != 0 && (
+			{received !== 0 && (
 				<div className={styles.chart}>
 					<Chart received={received} spent={spent} />
 				</div>
