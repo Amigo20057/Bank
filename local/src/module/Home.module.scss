@@ -90,7 +90,7 @@
 
 		& button {
 			position: absolute;
-			right: 50px;
+			right: 30px;
 			bottom: 20px;
 			width: 120px;
 			height: 30px;
@@ -101,6 +101,7 @@
 			font-size: 15px;
 			color: #fff;
 			border: 2px solid #000;
+			z-index: 2;
 		}
 	}
 }
@@ -140,8 +141,8 @@
 
 .chart {
 	width: 500px;
-	height: 500px;
-	position: relative;
-	right: -610px;
-	bottom: 350px;
+	height: 320px;
+	position: absolute;
+	right: 325px;
+	top: 425px;
 }

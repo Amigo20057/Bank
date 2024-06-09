@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { SideBar } from './components/SideBar.tsx'
+import { DeleteCard } from './pages/DeleteCard.tsx'
 import {
 	Attachment,
 	Credits,
@@ -26,7 +27,7 @@ export const App: React.FC = () => {
 		dispatch(fetchAuthMe())
 	}, [dispatch])
 
-	const hideSidebarRoutes = ['/moneyTransfer']
+	const hideSidebarRoutes = ['/moneyTransfer', '/deleteCard']
 
 	return (
 		<>
@@ -41,6 +42,7 @@ export const App: React.FC = () => {
 				<Route path='/support' element={<Support />} />
 				<Route path='/settings' element={<Settings />} />
 				<Route path='/moneyTransfer' element={<MoneyTransfer />} />
+				<Route path='/deleteCard' element={<DeleteCard />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</>
