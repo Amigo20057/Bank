@@ -29,3 +29,14 @@ export const cardCreateValidation = [
 	body('year').isInt({ min: 0, max: 99 }).withMessage('Invalid Year'),
 	body('cvv').isInt({ min: 100, max: 999 }).withMessage('Invalid CVV'),
 ]
+
+export const reportCreateValidation = [
+	body('fullName', 'Enter your name').isLength({ min: 3 }),
+	body('email', 'Invalid email format').isEmail(),
+	body('telephoneNumber', 'Invalid telephone number format').isLength({
+		min: 12,
+		max: 12,
+	}),
+	body('title', 'Title must have at least 5 characters').isLength({ min: 5 }),
+	body('text', 'Text must have at least 5 characters').isLength({ min: 5 }),
+]

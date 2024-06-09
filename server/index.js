@@ -6,11 +6,13 @@ import {
 	cardCreateValidation,
 	loginValidation,
 	registerValidation,
+	reportCreateValidation,
 } from './validations.js'
 
 import checkAuth from './utils/checkAuth.js'
 
 import * as CardController from './controllers/cardController.js'
+import * as ReportController from './controllers/reportController.js'
 import * as UserController from './controllers/userController.js'
 import handleValidationErrors from './utils/handleValidationErrors.js'
 
@@ -47,6 +49,14 @@ app.get('/card', checkAuth, CardController.getCard)
 app.post('/createCard', checkAuth, cardCreateValidation, CardController.create)
 app.post('/deleteCard', checkAuth, CardController.deleteCard)
 app.patch('/moneyTransfer', checkAuth, CardController.moneyTransfer)
+
+app.post(
+	'/report',
+	checkAuth,
+	reportCreateValidation,
+	handleValidationErrors,
+	ReportController.createReport
+)
 
 app.listen(4444, err => {
 	if (err) {
