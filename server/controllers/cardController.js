@@ -96,6 +96,12 @@ export const deleteCard = async (req, res) => {
 			})
 		}
 
+		if (card.balance != 0) {
+			return res.status(500).json({
+				message: 'There is money on the card ',
+			})
+		}
+
 		await CardModel.findByIdAndDelete(card._id)
 		user.cards = user.cards.filter(
 			c => c._id.toString() !== card._id.toString()
