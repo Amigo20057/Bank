@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { SideBar } from './components/SideBar.tsx'
+import { SideBar } from './components/SideBar/SideBar.tsx'
 import { DeleteCard } from './pages/DeleteCard.tsx'
 import {
 	Attachment,

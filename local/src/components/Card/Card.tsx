@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { ICard } from '../types/cardTypes'
+import { ICard } from '../../types/cardTypes'
 
-import styles from '../module/Card.module.scss'
+import styles from '../Card/Card.module.scss'
 
 export const Card: React.FC<ICard> = ({
 	_id,
