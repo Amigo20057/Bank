@@ -25,8 +25,13 @@ export const DeleteCard: React.FC = () => {
 	}, [dispatch])
 
 	const onSubmit = async (data: FormDelete) => {
-		await dispatch(deleteCard(data))
-		setRedirect(true)
+		try {
+			await dispatch(deleteCard(data)).unwrap()
+			alert('Карту видалено')
+			setRedirect(true)
+		} catch (error) {
+			alert('Помилка при видалені карти')
+		}
 	}
 	if (redirect) {
 		return <Navigate to='/' />
