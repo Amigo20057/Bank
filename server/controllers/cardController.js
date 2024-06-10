@@ -189,3 +189,39 @@ export const moneyTransfer = async (req, res) => {
 		})
 	}
 }
+
+export const takeLoan = async (req, res) => {
+	try {
+		const { cvv, cardNumber, amount, interestRate, term } = req.body
+		const user = await UserModel.findById(req.userId).populate('cards')
+
+		if (!user) {
+			return res.status(404).json({
+				message: 'User not found',
+			})
+		}
+
+		const card = user.cards.find(
+			card => card.cardNumber === cardNumber && card.cvv === cvv
+		)
+
+		if (!card) {
+			return res.status(404).json({
+				message: 'Card not found',
+			})
+		}
+
+		const loan = {
+			amount,
+			interestRate,
+			term,
+		}
+
+		await card.addLoan(loan)
+
+		res.json({ message: 'Loan taken successfully', card })
+	} catch (err) {
+		console.error(err)
+		res.status(500).json({ message: 'Failed to take loan' })
+	}
+}

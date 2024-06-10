@@ -19,6 +19,25 @@ const transferSchema = new mongoose.Schema({
 	},
 })
 
+const loanSchema = new mongoose.Schema({
+	amount: {
+		type: Number,
+		required: true,
+	},
+	interestRate: {
+		type: Number,
+		required: true,
+	},
+	term: {
+		type: Number,
+		required: true,
+	},
+	date: {
+		type: Date,
+		default: Date.now,
+	},
+})
+
 const cardSchema = new mongoose.Schema({
 	cardNumber: {
 		type: String,
@@ -44,6 +63,16 @@ const cardSchema = new mongoose.Schema({
 		type: [transferSchema],
 		default: [],
 	},
+	loans: {
+		type: [loanSchema],
+		default: [],
+		validate: {
+			validator: function (v) {
+				return v.length <= 3
+			},
+			message: 'A card can have a maximum of 3 loans',
+		},
+	},
 })
 
 cardSchema.methods.addTransfer = async function (transfer) {
@@ -53,6 +82,16 @@ cardSchema.methods.addTransfer = async function (transfer) {
 		this.transfers.pop()
 	}
 
+	await this.save()
+}
+
+cardSchema.methods.addLoan = async function (loan) {
+	if (this.loans.length >= 3) {
+		throw new Error('A card can have a maximum of 3 loans')
+	}
+
+	this.loans.unshift(loan)
+	this.balance += loan.amount
 	await this.save()
 }
 

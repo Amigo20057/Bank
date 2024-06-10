@@ -1,5 +1,6 @@
 import { Attachment } from './Attachment.tsx'
 import { Credits } from './Credits.tsx'
+import { DeleteCard } from './DeleteCard.tsx'
 import { Home } from './Home.tsx'
 import { Login } from './Login.tsx'
 import { MoneyTransfer } from './MoneyTransfer.tsx'
@@ -12,6 +13,7 @@ import { Valuta } from './Valuta.tsx'
 export {
 	Attachment,
 	Credits,
+	DeleteCard,
 	Home,
 	Login,
 	MoneyTransfer,

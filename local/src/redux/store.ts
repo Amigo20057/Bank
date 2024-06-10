@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { authReducer } from './slices/auth'
 import { cardReducer } from './slices/card'
+import { loanReducer } from './slices/loan'
 import { reportReducer } from './slices/report'
 
 const store = configureStore({
@@ -8,6 +9,7 @@ const store = configureStore({
 		auth: authReducer,
 		cards: cardReducer,
 		reports: reportReducer,
+		loans: loanReducer,
 	},
 })
 
