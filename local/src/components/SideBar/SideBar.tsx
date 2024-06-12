@@ -1,7 +1,6 @@
 import {
 	CircleDollarSign,
 	CreditCard,
-	HandCoins,
 	Headphones,
 	Landmark,
 	LogOut,
@@ -46,7 +45,7 @@ export const SideBar: React.FC = () => {
 							Карти
 						</Link>
 					</li>
-					<li className={active === 2 ? styles.active : ''}>
+					{/* <li className={active === 2 ? styles.active : ''}>
 						<HandCoins />
 						<Link
 							style={{ marginLeft: '15px' }}
@@ -55,7 +54,7 @@ export const SideBar: React.FC = () => {
 						>
 							Вкладення
 						</Link>
-					</li>
+					</li> */}
 					<li className={active === 3 ? styles.active : ''}>
 						<Landmark />
 						<Link

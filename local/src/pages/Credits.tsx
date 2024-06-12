@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import styles from '../module/Credit.module.scss'
 import { fetchCard } from '../redux/slices/card'
 
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { Commission } from '../components/Credit/Commission'
 import { CreditForm } from '../components/Credit/CreditForm'
 import { LoanCalculator } from '../components/Credit/LoanCalculator'
@@ -99,6 +99,11 @@ export const Credits: React.FC = () => {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div className={styles.repayLoan}>
+				<Link to='/repayLoan'>
+					<button>Погасити кредит</button>
+				</Link>
 			</div>
 		</div>
 	)

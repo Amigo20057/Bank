@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SideBar } from './components/SideBar/SideBar.tsx'
 import { DeleteCard } from './pages/DeleteCard.tsx'
 import {
-	Attachment,
 	Credits,
 	Home,
 	Login,
 	MoneyTransfer,
 	NotFound,
 	Register,
+	RepayLoan,
 	Settings,
 	Support,
 	Valuta,
@@ -27,7 +27,7 @@ export const App: React.FC = () => {
 		dispatch(fetchAuthMe())
 	}, [dispatch])
 
-	const hideSidebarRoutes = ['/moneyTransfer', '/deleteCard']
+	const hideSidebarRoutes = ['/moneyTransfer', '/deleteCard', '/repayLoan']
 
 	return (
 		<>
@@ -36,13 +36,16 @@ export const App: React.FC = () => {
 				<Route path='/login' element={<Login />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/' element={<Home />} />
-				<Route path='/attachment' element={<Attachment />} />
+				{/*
+ 				<Route path="/attachment" element={<Attachment />} />
+					*/}
 				<Route path='/credits' element={<Credits />} />
 				<Route path='/valuta' element={<Valuta />} />
 				<Route path='/support' element={<Support />} />
 				<Route path='/settings' element={<Settings />} />
 				<Route path='/moneyTransfer' element={<MoneyTransfer />} />
 				<Route path='/deleteCard' element={<DeleteCard />} />
+				<Route path='/repayLoan' element={<RepayLoan />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</>
