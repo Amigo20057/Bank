@@ -225,3 +225,69 @@ export const takeLoan = async (req, res) => {
 		res.status(500).json({ message: 'Failed to take loan' })
 	}
 }
+
+export const repayLoan = async (req, res) => {
+	try {
+		const { cvv, cardNumber, loan, money } = req.body
+		const user = await UserModel.findById(req.userId).populate('cards')
+
+		if (!user) {
+			return res.status(404).json({
+				message: 'User not found',
+			})
+		}
+
+		const card = user.cards.find(
+			card => card.cardNumber === cardNumber && card.cvv === cvv
+		)
+
+		if (!card) {
+			return res.status(404).json({
+				message: 'Card not found',
+			})
+		}
+
+		const loanToRepay = card.loans.find(l => l._id.toString() === loan)
+
+		if (!loanToRepay) {
+			return res.status(404).json({
+				message: 'Loan not found',
+			})
+		}
+
+		if (money <= 0) {
+			return res.status(400).json({
+				message: 'Invalid repayment amount',
+			})
+		}
+
+		if (card.balance < money) {
+			return res.status(400).json({
+				message: 'Insufficient funds',
+			})
+		}
+
+		if (loanToRepay.amount < money) {
+			return res.status(400).json({
+				message: 'Repayment amount exceeds loan amount',
+			})
+		}
+
+		loanToRepay.amount -= money
+		card.balance -= money
+
+		if (loanToRepay.amount === 0) {
+			card.loans = card.loans.filter(l => l._id.toString() !== loan)
+		}
+
+		await card.save()
+
+		res.json({
+			message: 'Loan repaid successfully',
+			card,
+		})
+	} catch (err) {
+		console.error(err)
+		res.status(500).json({ message: 'Failed to repay loan' })
+	}
+}

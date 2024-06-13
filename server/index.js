@@ -50,6 +50,7 @@ app.post('/createCard', checkAuth, cardCreateValidation, CardController.create)
 app.post('/deleteCard', checkAuth, CardController.deleteCard)
 app.patch('/moneyTransfer', checkAuth, CardController.moneyTransfer)
 app.patch('/takeLoan', checkAuth, CardController.takeLoan)
+app.patch('/repayLoan', checkAuth, CardController.repayLoan)
 
 app.post(
 	'/report',

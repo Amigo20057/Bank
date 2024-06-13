@@ -13,6 +13,18 @@ export const takeLoan = createAsyncThunk(
 	}
 )
 
+export const repayLoan = createAsyncThunk(
+	'loan/repayLoan',
+	async (loanData, { rejectWithValue }) => {
+		try {
+			const { data } = await axios.patch('/repayLoan', loanData)
+			return data
+		} catch (err) {
+			return rejectWithValue(err.response.data)
+		}
+	}
+)
+
 const initialState = {
 	status: 'idle',
 	error: null,
@@ -21,7 +33,12 @@ const initialState = {
 const loanSlice = createSlice({
 	name: 'loan',
 	initialState,
-	reducers: {},
+	reducers: {
+		resetLoanStatus: state => {
+			state.status = 'idle'
+			state.error = null
+		},
+	},
 	extraReducers: builder => {
 		builder
 			.addCase(takeLoan.pending, state => {
@@ -35,6 +52,18 @@ const loanSlice = createSlice({
 				state.error = action.payload
 					? action.payload.message
 					: 'Failed to take loan'
+			})
+			.addCase(repayLoan.pending, state => {
+				state.status = 'loading'
+			})
+			.addCase(repayLoan.fulfilled, state => {
+				state.status = 'succeeded'
+			})
+			.addCase(repayLoan.rejected, (state, action) => {
+				state.status = 'failed'
+				state.error = action.payload
+					? action.payload.message
+					: 'Failed to repay loan'
 			})
 	},
 })

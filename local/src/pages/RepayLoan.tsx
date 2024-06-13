@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import styles from '../module/RepayLoan.module.scss'
 import { fetchCard } from '../redux/slices/card'
+import { repayLoan } from '../redux/slices/loan'
 
 interface Loan {
 	_id: string
@@ -21,7 +22,7 @@ interface Card {
 interface FormLoan {
 	cardNumber: string
 	loan: string
-	money: number
+	money: string
 	cvv: string
 }
 
@@ -36,7 +37,7 @@ export const RepayLoan: React.FC = () => {
 		defaultValues: {
 			cardNumber: '',
 			loan: '',
-			money: 0,
+			money: '',
 			cvv: '',
 		},
 		mode: 'onChange',
@@ -47,12 +48,9 @@ export const RepayLoan: React.FC = () => {
 	}, [dispatch])
 
 	const onSubmit = async (data: FormLoan) => {
-		// Обработайте отправку формы, например, отправьте запрос на сервер
-		console.log(data)
+		await dispatch(repayLoan(data))
 		setRedirect(true)
 	}
-
-	// const selectedCardNumber = watch('cardNumber')
 
 	if (redirect) {
 		return <Navigate to='/' />
@@ -98,7 +96,7 @@ export const RepayLoan: React.FC = () => {
 								{cards.items
 									.find((card: Card) => card.cardNumber === selectedCard)
 									?.loans.map((loan: Loan) => (
-										<option key={loan._id} value={loan.amount}>
+										<option key={loan._id} value={loan._id}>
 											Кредит на {loan.amount} $
 										</option>
 									))}
@@ -109,14 +107,12 @@ export const RepayLoan: React.FC = () => {
 					<h3>Сума для погашення</h3>
 					<input
 						{...register('money', { required: 'Вкажіть суму для погашення' })}
-						placeholder='Сума для погашення'
 						type='number'
 					/>
 
 					<h3>CVV код</h3>
 					<input
 						{...register('cvv', { required: 'Вкажіть cvv код' })}
-						placeholder='CVV'
 						type='password'
 					/>
 
