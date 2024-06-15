@@ -77,8 +77,6 @@ export const Credits: React.FC = () => {
 						<Term term={term} setTerm={setTerm} />
 					</div>
 					<LoanCalculator
-						money={money}
-						setMoney={setMoney}
 						monthlyPayment={monthlyPayment}
 						totalCost={totalCost}
 						totalCreditCost={totalCreditCost}

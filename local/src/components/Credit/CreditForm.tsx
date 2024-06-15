@@ -4,21 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from '../../module/Credit.module.scss'
 import { takeLoan } from '../../redux/slices/loan'
 
-interface IFormCredit {
-	cardNumber: string
-	cvv: string
-	commission: number
-	money: number
-	term: number
-	monthlyPayment: number
-}
-
-interface CreditFormProps {
-	commission: number
-	money: number
-	term: number
-	setRedirect: (value: boolean) => void
-}
+import { CreditFormProps, IFormCredit } from '../../types/loanComponentTypes'
 
 export const CreditForm: React.FC<CreditFormProps> = ({
 	commission,

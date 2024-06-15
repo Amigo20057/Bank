@@ -1,10 +1,7 @@
 import React from 'react'
 import styles from '../../module/Credit.module.scss'
 
-interface TermSelectorProps {
-	term: number
-	setTerm: (value: number) => void
-}
+import { TermSelectorProps } from '../../types/loanComponentTypes'
 
 export const Term: React.FC<TermSelectorProps> = ({ term, setTerm }) => {
 	return (

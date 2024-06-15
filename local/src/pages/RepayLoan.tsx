@@ -7,24 +7,7 @@ import styles from '../module/RepayLoan.module.scss'
 import { fetchCard } from '../redux/slices/card'
 import { repayLoan } from '../redux/slices/loan'
 
-interface Loan {
-	_id: string
-	amount: number
-}
-
-interface Card {
-	_id: string
-	cardNumber: string
-	balance: number
-	loans: Loan[]
-}
-
-interface FormLoan {
-	cardNumber: string
-	loan: string
-	money: string
-	cvv: string
-}
+import { Card, FormLoan, Loan } from '../types/repayLoanTypes'
 
 export const RepayLoan: React.FC = () => {
 	const dispatch = useDispatch()

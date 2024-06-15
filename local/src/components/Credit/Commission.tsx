@@ -1,10 +1,7 @@
 import React from 'react'
 import styles from '../../module/Credit.module.scss'
 
-interface CommissionSelectorProps {
-	commission: number
-	setCommission: (value: number) => void
-}
+import { CommissionSelectorProps } from '../../types/loanComponentTypes'
 
 export const Commission: React.FC<CommissionSelectorProps> = ({
 	commission,

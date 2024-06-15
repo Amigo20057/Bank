@@ -1,19 +1,9 @@
 import React from 'react'
 import styles from '../../module/Credit.module.scss'
 
-interface LoanCalculatorProps {
-	money: number
-	setMoney: (value: number) => void
-	monthlyPayment: number
-	totalCost: number
-	totalCreditCost: number
-	oneTimeFee: number
-	annualRate: string
-}
+import { LoanCalculatorProps } from '../../types/loanComponentTypes'
 
 export const LoanCalculator: React.FC<LoanCalculatorProps> = ({
-	money,
-	setMoney,
 	monthlyPayment,
 	totalCost,
 	totalCreditCost,
