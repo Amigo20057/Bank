@@ -9,12 +9,11 @@ import {
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { logout, selectIsAuth } from '../../redux/slices/auth'
+import { logout } from '../../redux/slices/auth'
 import styles from '../SideBar/SideBar.module.scss'
 
 export const SideBar: React.FC = () => {
 	const [active, setActive] = useState(1)
-	const isAuth = useSelector(selectIsAuth)
 	const userData = useSelector(state => state.auth.data)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()

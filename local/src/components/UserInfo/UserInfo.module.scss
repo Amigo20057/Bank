@@ -1,0 +1,17 @@
+.userInfo {
+	right: 50px;
+	top: 50px;
+	padding: 20px;
+	position: absolute;
+	width: 300px;
+	height: 200px;
+	border-radius: 20px;
+	background-color: #1b1b1b;
+}
+
+.userInfo div {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
