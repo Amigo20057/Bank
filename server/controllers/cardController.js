@@ -150,6 +150,12 @@ export const moneyTransfer = async (req, res) => {
 			})
 		}
 
+		if (cardNumberFirstUser === cardNumberSecondUser) {
+			return res.status(500).json({
+				message: `You cannot send money to the sender's card`,
+			})
+		}
+
 		if (cardFirstUser.balance < money) {
 			return res.status(400).json({
 				message: 'Insufficient funds',

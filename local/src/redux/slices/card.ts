@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../../axios'
+import { FormDelete } from '../../types/authTypes'
+import { ITransferMoneyForm } from '../../types/cardTypes'
 
 export const fetchCard = createAsyncThunk('card/fetchCard', async () => {
 	const { data } = await axios.get('/card')
@@ -16,15 +18,15 @@ export const createCard = createAsyncThunk(
 
 export const deleteCard = createAsyncThunk(
 	'card/deleteCard',
-	async ({ cardNumber, cvv }) => {
-		const { data } = await axios.post('/deleteCard', { cardNumber, cvv })
+	async (params: FormDelete) => {
+		const { data } = await axios.post('/deleteCard', params)
 		return data
 	}
 )
 
 export const moneyTransfer = createAsyncThunk(
 	'transfer/moneyTransfer',
-	async transferData => {
+	async (transferData: ITransferMoneyForm) => {
 		const { data } = await axios.patch('/moneyTransfer', transferData)
 		return data
 	}

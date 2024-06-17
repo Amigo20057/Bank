@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../../axios'
+import { IFormSupport } from '../../types/supportTypes'
 
 export const createReport = createAsyncThunk(
 	'/reportCreate',
-	async reportData => {
+	async (reportData: IFormSupport) => {
 		const { data } = await axios.post('/report', reportData)
 		return data
 	}
