@@ -34,7 +34,7 @@ export const DeleteCard: React.FC = () => {
 		}
 	}
 	if (redirect) {
-		return <Navigate to='/' />
+		return <Navigate to='/settings' />
 	}
 
 	return (
