@@ -37,26 +37,55 @@ export const Login: React.FC = () => {
 	return (
 		<div className={styles.login}>
 			<div className={styles.container}>
-				<h1>LOGIN ACCOUNT</h1>
+				<h1>Log in account</h1>
 				<form onSubmit={handleSubmit(onSubmit)}>
+					<div className={styles.alternativeLogin}>
+						<button>
+							<img
+								src='./logo-google-icon.png'
+								alt='google-icon'
+								width={24}
+								height={24}
+							/>
+							<p>Google</p>
+						</button>
+						<button>
+							<img
+								src='./logo-facebook-icon.png'
+								alt='facebook-icon'
+								width={15}
+								height={25}
+							/>
+							<p>Facebook</p>
+						</button>
+					</div>
+					<p>or</p>
+					<label htmlFor='email'>Email</label>
 					<input
 						{...register('email', { required: 'Вкажіть почту' })}
-						placeholder='E-Mail'
+						id='email'
+						placeholder='Enter email address'
 						type='text'
 					/>
+					<label style={{ left: '-143px' }} htmlFor='password'>
+						Password
+					</label>
 					<input
 						{...register('password', { required: 'Вкажіть пароль' })}
-						placeholder='Пароль'
+						placeholder='Enter your password'
 						type='password'
+						id='password'
 					/>
-					<button type='submit'>Авторизуватись</button>
-					<Link
-						style={{ color: 'var(--main-color)', marginTop: '25px' }}
-						to='/register'
-					>
-						Створити акаунт
-					</Link>
+					<button type='submit'>Log in</button>
 				</form>
+			</div>
+			<div style={{ marginTop: '30px' }}>
+				<span>Don't have an account?</span>
+				<span>
+					<Link style={{ color: '#8175dc', marginLeft: '5px' }} to='/register'>
+						Sign up
+					</Link>
+				</span>
 			</div>
 		</div>
 	)
