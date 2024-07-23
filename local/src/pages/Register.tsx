@@ -41,36 +41,64 @@ export const Register: React.FC = () => {
 	return (
 		<div className={styles.register}>
 			<div className={styles.container}>
-				<h1>CREATE ACCOUNT</h1>
+				<h1>Create new account</h1>
 				<form onSubmit={handleSubmit(onSubmit)}>
+					<div className={styles.alternativeRegister}>
+						<button>
+							<img
+								src='./logo-google-icon.png'
+								alt='google-icon'
+								width={24}
+								height={24}
+							/>
+							<p>Google</p>
+						</button>
+						<button>
+							<img
+								src='./logo-facebook-icon.png'
+								alt='facebook-icon'
+								width={15}
+								height={25}
+							/>
+							<p>Facebook</p>
+						</button>
+					</div>
+					<p>or</p>
+					<label style={{ left: '-143px' }} htmlFor='fullName'>
+						Full name
+					</label>
 					<input
 						{...register('fullName', { required: `Вкажіть повне ім'я` })}
-						placeholder={`Повне ім'я`}
+						placeholder={`Enter your full name`}
 						type='text'
+						id='fullName'
 					/>
+					<label htmlFor='email'>Email</label>
 					<input
 						{...register('email', { required: 'Вкажіть почту' })}
-						placeholder='E-Mail'
+						placeholder='Enter email address'
 						type='email'
+						id='email'
 					/>
+					<label style={{ left: '-143px' }} htmlFor='password'>
+						Password
+					</label>
 					<input
 						{...register('password', { required: 'Вкажіть пароль' })}
-						placeholder='Пароль'
+						placeholder='Enter your password'
 						type='password'
+						id='password'
 					/>
 					<button type='submit'>Зареєструватися</button>
-					<Link
-						style={{
-							color: 'var(--main-color)',
-							position: 'relative',
-							// left: '150px',
-							marginTop: '45px',
-						}}
-						to='/login'
-					>
-						Акаунт вже існує
-					</Link>
 				</form>
+			</div>
+			<div style={{ marginTop: '30px' }}>
+				<span>Your have an account?</span>
+				<span>
+					<Link style={{ color: '#8175dc', marginLeft: '5px' }} to='/login'>
+						Sign in
+					</Link>
+				</span>
 			</div>
 		</div>
 	)
