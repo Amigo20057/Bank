@@ -5,7 +5,7 @@ export const takeLoan = createAsyncThunk(
 	'loan/takeLoan',
 	async (loanData, { rejectWithValue }) => {
 		try {
-			const { data } = await axios.patch('/takeLoan', loanData)
+			const { data } = await axios.patch('/card/takeLoan', loanData)
 			return data
 		} catch (err) {
 			return rejectWithValue(err.response.data)
@@ -17,7 +17,7 @@ export const repayLoan = createAsyncThunk(
 	'loan/repayLoan',
 	async (loanData, { rejectWithValue }) => {
 		try {
-			const { data } = await axios.patch('/repayLoan', loanData)
+			const { data } = await axios.patch('/card/repayLoan', loanData)
 			return data
 		} catch (err) {
 			return rejectWithValue(err.response.data)

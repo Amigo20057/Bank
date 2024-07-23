@@ -5,7 +5,7 @@ import { IFormSupport } from '../../types/supportTypes'
 export const createReport = createAsyncThunk(
 	'/reportCreate',
 	async (reportData: IFormSupport) => {
-		const { data } = await axios.post('/report', reportData)
+		const { data } = await axios.post('/report/create', reportData)
 		return data
 	}
 )

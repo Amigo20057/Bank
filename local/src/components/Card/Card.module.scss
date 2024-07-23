@@ -6,7 +6,13 @@
 	border-radius: 20px;
 	margin-right: 70px;
 	transition: 0.25s;
+	/* border: 1px solid #000; */
 	transform: perspective(600px) rotateY(0);
+
+	&:hover {
+		transform: scale(1.05);
+		/* border: 1px solid #fff; */
+	}
 
 	.date {
 		width: 100%;
@@ -14,6 +20,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		user-select: none;
 
 		& h3 {
 			font-weight: 200;

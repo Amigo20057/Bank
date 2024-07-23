@@ -30,7 +30,7 @@ export const SideBar: React.FC = () => {
 		<div className={styles.sideBar}>
 			<div className={styles.profile}>
 				<div className={styles.avatar}></div>
-				<h3>{userData.fullName}</h3>
+				<h3>{userData.fullname}</h3>
 			</div>
 			<div className={styles.menu}>
 				<ul>

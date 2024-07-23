@@ -59,8 +59,8 @@ export const DeleteCard: React.FC = () => {
 					>
 						<option value=''>-- Виберіть карту --</option>
 						{cards.items.map(card => (
-							<option key={card._id} value={card.cardNumber}>
-								{card.cardNumber} (Баланс: {card.balance} $)
+							<option key={card._id} value={card.card_number}>
+								{card.card_number} (Баланс: {card.balance} $)
 							</option>
 						))}
 					</select>

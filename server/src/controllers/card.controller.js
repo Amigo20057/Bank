@@ -213,6 +213,38 @@ class CardController {
 		}
 	}
 
+	async getMoneyTransfers(req, res) {
+		try {
+			const user_id = req.user_id
+
+			if (!user_id) {
+				return res.status(400).json({ message: 'User ID is required' })
+			}
+
+			const cardIdsResult = await db.query(
+				'SELECT card_id FROM user_cards WHERE user_id = $1',
+				[user_id]
+			)
+
+			if (cardIdsResult.rows.length === 0) {
+				return res.status(404).json({ message: 'No cards found for this user' })
+			}
+
+			const cardIds = cardIdsResult.rows.map(row => row.card_id)
+
+			//ТУТ ОШИБКА
+			const transfersResult = await db.query(
+				'SELECT * FROM transfers WHERE sender_card_id = ANY($1::int[]) OR recipient_card_id = ANY($1::int[])',
+				[cardIds]
+			)
+
+			res.json(transfersResult.rows)
+		} catch (err) {
+			console.error(err)
+			res.status(500).json({ message: 'Failed to get transfers' })
+		}
+	}
+
 	async takeLoan(req, res) {
 		try {
 			const { cvv, cardNumber, amount, interestRate, term } = req.body
@@ -320,6 +352,39 @@ class CardController {
 			console.error(err)
 			await db.query('ROLLBACK')
 			res.status(500).json({ message: 'Failed to repay loan' })
+		}
+	}
+
+	async loan(req, res) {
+		try {
+			const user_id = req.user_id
+
+			if (!user_id) {
+				return res.status(400).json({ message: 'User ID is required' })
+			}
+
+			const cardIdsResult = await db.query(
+				'SELECT card_id FROM user_cards WHERE user_id = $1',
+				[user_id]
+			)
+
+			if (cardIdsResult.rows.length === 0) {
+				return res.status(404).json({ message: 'No cards found for this user' })
+			}
+
+			const cardIds = cardIdsResult.rows.map(row => row.card_id)
+
+			const loansResult = await db.query(
+				'SELECT * FROM loans WHERE card_id = ANY($1::int[])',
+				[cardIds]
+			)
+
+			res.json(loansResult.rows)
+		} catch (err) {
+			console.error(err)
+			res.status(500).json({
+				message: 'Failed to get loans',
+			})
 		}
 	}
 }

@@ -23,7 +23,7 @@ export const UserInfo: React.FC = () => {
 			</h1>
 			<div>
 				<p>FULL NAME : </p>
-				<p>{userData.fullName}</p>
+				<p>{userData.fullname}</p>
 			</div>
 			<div>
 				<p>EMAIL : </p>

@@ -4,14 +4,14 @@ import { FormDelete } from '../../types/authTypes'
 import { ITransferMoneyForm } from '../../types/cardTypes'
 
 export const fetchCard = createAsyncThunk('card/fetchCard', async () => {
-	const { data } = await axios.get('/card')
+	const { data } = await axios.get('/card/card')
 	return data
 })
 
 export const createCard = createAsyncThunk(
 	'card/createCard',
 	async newCardData => {
-		const { data } = await axios.post('/createCard', newCardData)
+		const { data } = await axios.post('/card/create', newCardData)
 		return data
 	}
 )
@@ -19,7 +19,7 @@ export const createCard = createAsyncThunk(
 export const deleteCard = createAsyncThunk(
 	'card/deleteCard',
 	async (params: FormDelete) => {
-		const { data } = await axios.post('/deleteCard', params)
+		const { data } = await axios.post('/card/delete', params)
 		return data
 	}
 )
@@ -27,7 +27,7 @@ export const deleteCard = createAsyncThunk(
 export const moneyTransfer = createAsyncThunk(
 	'transfer/moneyTransfer',
 	async (transferData: ITransferMoneyForm) => {
-		const { data } = await axios.patch('/moneyTransfer', transferData)
+		const { data } = await axios.patch('/card/moneyTransfer', transferData)
 		return data
 	}
 )

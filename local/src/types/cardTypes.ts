@@ -1,6 +1,6 @@
 export interface ICard {
 	_id: any
-	cardNumber: number
+	card_number: number
 	balance: number
 	month: string
 	year: string

@@ -12,9 +12,11 @@ router.post(
 	cardCreateValidation,
 	CardController.createCard
 )
-router.delete('/delete', checkAuth, CardController.deleteCard)
+router.post('/delete', checkAuth, CardController.deleteCard)
 router.patch('/moneyTransfer', checkAuth, CardController.moneyTransfer)
+router.get('/getMoneyTransfers', checkAuth, CardController.getMoneyTransfers)
 router.post('/takeLoan', checkAuth, CardController.takeLoan)
 router.post('/repayLoan', checkAuth, CardController.repayLoan)
+router.get('/loan', checkAuth, CardController.loan)
 
 export default router
