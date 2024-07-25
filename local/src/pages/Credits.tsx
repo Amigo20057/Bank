@@ -10,6 +10,7 @@ import { LoanCalculator } from '../components/Credit/LoanCalculator'
 import { Term } from '../components/Credit/Term'
 
 export const Credits: React.FC = () => {
+	const dispatch = useDispatch()
 	const [commission, setCommission] = useState(2.5)
 	const [money, setMoney] = useState(3000)
 	const [term, setTerm] = useState(12)
@@ -18,7 +19,6 @@ export const Credits: React.FC = () => {
 	const [totalCreditCost, setTotalCreditCost] = useState(0)
 	const [oneTimeFee, setOneTimeFee] = useState(0)
 	const [annualRate, setAnnualRate] = useState('')
-	const dispatch = useDispatch()
 	const [redirect, setRedirect] = useState(false)
 
 	useEffect(() => {

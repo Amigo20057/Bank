@@ -1,11 +1,9 @@
 .home {
 	position: relative;
-	width: 78%;
-	height: 90vh;
+	width: 90%;
+	height: 100vh;
 	padding: 50px;
-	background-color: var(--main-color);
-	margin-top: 50px;
-	border-radius: 40px;
+	background-color: #1f2125;
 }
 
 .cards {
@@ -51,9 +49,13 @@
 }
 
 .payments {
-	width: 100%;
+	width: 40%;
 	height: 32%;
-	margin-bottom: 30px;
+	padding: 20px;
+	margin-bottom: 40px;
+	border-radius: 3px;
+	background-color: #1a1c1e;
+	box-shadow: 0px 10px 15px 0px #1a1c1e;
 
 	& h2 {
 		font-weight: 400;
@@ -62,13 +64,15 @@
 
 	& ul.fullTransfers {
 		position: absolute;
-		top: 10px;
-		border: 2px solid #000;
-		border-radius: 10px;
-		background-color: #393939;
-		width: 540px;
-		height: 95%;
-		padding: 20px;
+		width: 800px;
+		height: 90%;
+		top: 50px;
+		left: 50px;
+		padding: 50px;
+		border: 1px solid #282031;
+		border-radius: 3px;
+		background-color: #1a1c1e;
+		box-shadow: 0px 10px 15px 0px #282031;
 		display: flex;
 		flex-direction: column;
 		transition: all 0.25s;
@@ -108,14 +112,17 @@
 			bottom: 20px;
 			width: 120px;
 			height: 30px;
-			background-color: transparent;
-			border: none;
-			border-radius: 5px;
+			background-color: #8e80f5;
+			border-radius: 3px;
 			font-weight: 400;
 			font-size: 15px;
 			color: #fff;
-			border: 2px solid #000;
+			border: none;
 			z-index: 2;
+
+			&:hover {
+				background-color: #7160f1;
+			}
 		}
 	}
 }
@@ -136,12 +143,17 @@
 		margin: 15px;
 		width: 70px;
 		height: 70px;
-		background-color: #393939;
-		border: 2px solid #000;
-		border-radius: 10px;
+		background-color: #8e80f5;
+		border: none;
+		border-radius: 3px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		transition: 0.25s;
+
+		&:hover {
+			background-color: #7968f3;
+		}
 
 		& a {
 			width: 100%;

@@ -89,7 +89,7 @@ export const Register: React.FC = () => {
 						type='password'
 						id='password'
 					/>
-					<button type='submit'>Зареєструватися</button>
+					<button type='submit'>Register</button>
 				</form>
 			</div>
 			<div style={{ marginTop: '30px' }}>

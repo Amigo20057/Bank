@@ -5,17 +5,24 @@ import { Link, Navigate } from 'react-router-dom'
 import { Card } from '../components/Card/Card'
 import styles from '../module/Home.module.scss'
 import { selectIsAuth } from '../redux/slices/auth'
-import { createCard, fetchCard } from '../redux/slices/card'
+import { createCard, fetchCard, getMoneyTransfers } from '../redux/slices/card'
 
 export const Home: React.FC = () => {
 	const isAuth: boolean = useSelector(selectIsAuth)
 	const dispatch = useDispatch()
-	const { cards } = useSelector(state => state.cards)
+	const { cards, transfers } = useSelector(state => state.cards)
 	const data = cards.items
+	const transferData = transfers.items
 	const [fullTransfers, setFullTransfers] = useState(false)
+
+	const [received, setReceived] = useState(0)
+	const [spent, setSpent] = useState(0)
+
+	console.log(transferData)
 
 	useEffect(() => {
 		dispatch(fetchCard())
+		dispatch(getMoneyTransfers())
 	}, [dispatch])
 
 	if (!isAuth) {
@@ -26,32 +33,27 @@ export const Home: React.FC = () => {
 		dispatch(createCard())
 	}
 
-	// const calculateTotals = () => {
-	// 	let received = 0
-	// 	let spent = 0
-	// 	data.forEach(card => {
-	// 		card.transfers.forEach(transfer => {
-	// 			if (card.cardNumber === transfer.senderCardNumber) {
-	// 				spent += transfer.amount
-	// 			} else {
-	// 				received += transfer.amount
-	// 			}
-	// 		})
-	// 	})
-	// 	return { received, spent }
-	// }
+	//TEST
+	const chart = () => {
+		allTransfers.map(transfer => {
+			if (transfer.isSent) {
+				setSpent(transfer.amount)
+			}
+			setReceived(transfer.amount)
+		})
+	}
 
-	// const { received, spent } = calculateTotals()
-
-	// const allTransfers = data.reduce((acc, card) => {
-	// 	const cardTransfers = card.transfers.map(transfer => ({
-	// 		...transfer,
-	// 		cardNumber: card.cardNumber,
-	// 	}))
-	// 	return acc.concat(cardTransfers)
-	// }, [])
-
-	// allTransfers.sort((a, b) => new Date(b.date) - new Date(a.date))
+	const allTransfers = transferData
+		.map((transfer, index) => {
+			const isSent = data.some(
+				card => card.card_number === transfer.sender_card_number
+			)
+			return {
+				...transfer,
+				isSent,
+			}
+		})
+		.sort((a, b) => new Date(b.date) - new Date(a.date))
 
 	return (
 		<div className={styles.home}>
@@ -81,25 +83,22 @@ export const Home: React.FC = () => {
 			<div className={styles.payments}>
 				<h2>Платежі</h2>
 				<ul className={fullTransfers ? styles.fullTransfers : ''}>
-					{/* {allTransfers.map((transfer, index) => {
-						const isSent = transfer.cardNumber === transfer.senderCardNumber
-						return (
-							<li
-								key={index}
-								className={isSent ? styles.sent : styles.received}
-							>
-								<span className={isSent ? styles.minus : styles.plus}>
-									{isSent ? '-' : '+'}
-								</span>
-								{transfer.amount} $
-								<span>
-									{isSent
-										? ' Зі своєї карти'
-										: ` від ${transfer.senderCardNumber}`}
-								</span>
-							</li>
-						)
-					})} */}
+					{allTransfers.map((transfer, index) => (
+						<li
+							key={index}
+							className={transfer.isSent ? styles.sent : styles.received}
+						>
+							<span className={transfer.isSent ? styles.minus : styles.plus}>
+								{transfer.isSent ? '' : '+'}
+							</span>
+							{transfer.amount} $
+							<span>
+								{transfer.isSent
+									? ' Зі своєї карти'
+									: ` від ${transfer.sender_card_number}`}
+							</span>
+						</li>
+					))}
 					<button onClick={() => setFullTransfers(!fullTransfers)}>
 						{!fullTransfers ? 'Усі' : 'Закрити'}
 					</button>
@@ -115,11 +114,6 @@ export const Home: React.FC = () => {
 					</button>
 				</div>
 			</div>
-			{/* {received !== 0 && (
-				<div className={styles.chart}>
-					<Chart received={received} spent={spent} />
-				</div>
-			)} */}
 		</div>
 	)
 }

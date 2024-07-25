@@ -221,21 +221,27 @@ class CardController {
 				return res.status(400).json({ message: 'User ID is required' })
 			}
 
-			const cardIdsResult = await db.query(
+			const cardIdResult = await db.query(
 				'SELECT card_id FROM user_cards WHERE user_id = $1',
 				[user_id]
 			)
 
-			if (cardIdsResult.rows.length === 0) {
+			if (cardIdResult.rows.length === 0) {
 				return res.status(404).json({ message: 'No cards found for this user' })
 			}
 
-			const cardIds = cardIdsResult.rows.map(row => row.card_id)
+			const cardIds = cardIdResult.rows.map(row => row.card_id)
 
-			//ТУТ ОШИБКА
-			const transfersResult = await db.query(
-				'SELECT * FROM transfers WHERE sender_card_id = ANY($1::int[]) OR recipient_card_id = ANY($1::int[])',
+			const cardNumbersResult = await db.query(
+				'SELECT card_number FROM cards WHERE card_id = ANY($1::int[])',
 				[cardIds]
+			)
+
+			const cardNumbers = cardNumbersResult.rows.map(row => row.card_number)
+
+			const transfersResult = await db.query(
+				'SELECT * FROM transfers WHERE sender_card_number = ANY($1::text[]) OR recipient_card_number = ANY($1::text[])',
+				[cardNumbers]
 			)
 
 			res.json(transfersResult.rows)
@@ -244,7 +250,6 @@ class CardController {
 			res.status(500).json({ message: 'Failed to get transfers' })
 		}
 	}
-
 	async takeLoan(req, res) {
 		try {
 			const { cvv, cardNumber, amount, interestRate, term } = req.body
