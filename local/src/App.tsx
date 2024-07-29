@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { SideBar } from './components/SideBar/SideBar.tsx'
-import { DeleteCard } from './pages/DeleteCard.tsx'
+import { DeleteCard } from './pages/DeleteCard/DeleteCard.tsx'
 import {
 	Credits,
 	Home,
@@ -36,9 +36,6 @@ export const App: React.FC = () => {
 				<Route path='/login' element={<Login />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/' element={<Home />} />
-				{/*
- 				<Route path="/attachment" element={<Attachment />} />
-					*/}
 				<Route path='/credits' element={<Credits />} />
 				<Route path='/valuta' element={<Valuta />} />
 				<Route path='/support' element={<Support />} />

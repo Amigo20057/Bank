@@ -1,10 +1,10 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import styles from '../module/Support.module.scss'
+import styles from './Support.module.scss'
 
-import { createReport } from '../redux/slices/report'
-import { IFormSupport } from '../types/supportTypes'
+import { createReport } from '../../redux/slices/report'
+import { IFormSupport } from '../../types/supportTypes'
 
 export const Support: React.FC = () => {
 	const dispatch = useDispatch()

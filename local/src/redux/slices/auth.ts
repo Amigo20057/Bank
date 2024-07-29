@@ -5,7 +5,7 @@ import { AuthState, FormValues } from '../../types/authTypes.ts'
 
 export const fetchAuth = createAsyncThunk(
 	'auth/fetchAuth',
-	async (params: FormValues) => {
+	async (params: FormValues): Promise<FormValues> => {
 		const { data } = await axios.post('/auth/login', params)
 		return data
 	}

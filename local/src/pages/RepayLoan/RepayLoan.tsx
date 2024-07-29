@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import styles from '../module/RepayLoan.module.scss'
-import { fetchCard } from '../redux/slices/card'
-import { repayLoan } from '../redux/slices/loan'
+import { fetchCard } from '../../redux/slices/card'
+import { repayLoan } from '../../redux/slices/loan'
+import styles from './RepayLoan.module.scss'
 
-import { Card, FormLoan, Loan } from '../types/repayLoanTypes'
+import { Card, FormLoan, Loan } from '../../types/repayLoanTypes'
 
 export const RepayLoan: React.FC = () => {
 	const dispatch = useDispatch()

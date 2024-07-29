@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import styles from '../module/DeleteCard.module.scss'
-import { deleteCard, fetchCard } from '../redux/slices/card'
-import { FormDelete } from '../types/authTypes'
+import { deleteCard, fetchCard } from '../../redux/slices/card'
+import { FormDelete } from '../../types/authTypes'
+import styles from './DeleteCard.module.scss'
 
 export const DeleteCard: React.FC = () => {
 	const dispatch = useDispatch()

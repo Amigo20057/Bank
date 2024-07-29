@@ -2,10 +2,14 @@ import { Banknote, Plus } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
-import { Card } from '../components/Card/Card'
-import styles from '../module/Home.module.scss'
-import { selectIsAuth } from '../redux/slices/auth'
-import { createCard, fetchCard, getMoneyTransfers } from '../redux/slices/card'
+import { Card } from '../../components/Card/Card'
+import { selectIsAuth } from '../../redux/slices/auth'
+import {
+	createCard,
+	fetchCard,
+	getMoneyTransfers,
+} from '../../redux/slices/card'
+import styles from './Home.module.scss'
 
 export const Home: React.FC = () => {
 	const isAuth: boolean = useSelector(selectIsAuth)

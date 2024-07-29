@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import styles from '../module/Credit.module.scss'
-import { fetchCard } from '../redux/slices/card'
+import { fetchCard } from '../../redux/slices/card'
+import styles from './Credit.module.scss'
 
 import { Link, Navigate } from 'react-router-dom'
-import { Commission } from '../components/Credit/Commission'
-import { CreditForm } from '../components/Credit/CreditForm'
-import { LoanCalculator } from '../components/Credit/LoanCalculator'
-import { Term } from '../components/Credit/Term'
+import { Commission } from '../../components/Credit/Commission'
+import { CreditForm } from '../../components/Credit/CreditForm'
+import { LoanCalculator } from '../../components/Credit/LoanCalculator'
+import { Term } from '../../components/Credit/Term'
 
 export const Credits: React.FC = () => {
 	const dispatch = useDispatch()

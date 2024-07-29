@@ -1,18 +1,15 @@
-import { Attachment } from './Attachment.tsx'
-import { Credits } from './Credits.tsx'
-import { DeleteCard } from './DeleteCard.tsx'
-import { Home } from './Home.tsx'
-import { Login } from './Login.tsx'
-import { MoneyTransfer } from './MoneyTransfer.tsx'
+import { Login } from './Auth/Login/Login.tsx'
+import { Register } from './Auth/Register/Register.tsx'
+import { Credits } from './Credit/Credits.tsx'
+import { DeleteCard } from './DeleteCard/DeleteCard.tsx'
+import { Home } from './Home/Home.tsx'
+import { MoneyTransfer } from './MoneyTransfer/MoneyTransfer.tsx'
 import { NotFound } from './NotFound.tsx'
-import { Register } from './Register.tsx'
-import { RepayLoan } from './RepayLoan.tsx'
-import { Settings } from './Settings.tsx'
-import { Support } from './Support.tsx'
-import { Valuta } from './Valuta.tsx'
-
+import { RepayLoan } from './RepayLoan/RepayLoan.tsx'
+import { Settings } from './Settings/Settings.tsx'
+import { Support } from './Support/Support.tsx'
+import { Valuta } from './Valuta/Valuta.tsx'
 export {
-	Attachment,
 	Credits,
 	DeleteCard,
 	Home,

@@ -2,11 +2,11 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
-import styles from '../module/Register.module.scss'
-import { fetchRegister, selectIsAuth } from '../redux/slices/auth'
+import { fetchRegister, selectIsAuth } from '../../../redux/slices/auth'
+import styles from './Register.module.scss'
 
-import { AppDispatch } from '../redux/store'
-import { FormValues, Payload } from '../types/authTypes'
+import { AppDispatch } from '../../../redux/store'
+import { FormValues, Payload } from '../../../types/authTypes'
 
 export const Register: React.FC = () => {
 	const isAuth: boolean = useSelector(selectIsAuth)

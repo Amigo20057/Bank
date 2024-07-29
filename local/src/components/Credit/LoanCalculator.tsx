@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../module/Credit.module.scss'
+import styles from '../../pages/Credit/Credit.module.scss'
 
 import { LoanCalculatorProps } from '../../types/loanComponentTypes'
 

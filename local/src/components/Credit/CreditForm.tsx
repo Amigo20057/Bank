@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import styles from '../../module/Credit.module.scss'
+import styles from '../../pages/Credit/Credit.module.scss'
 import { takeLoan } from '../../redux/slices/loan'
 
 import { CreditFormProps, IFormCredit } from '../../types/loanComponentTypes'

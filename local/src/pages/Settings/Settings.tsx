@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { UserInfo } from '../components/UserInfo/UserInfo'
-import styles from '../module/Settings.module.scss'
+import { UserInfo } from '../../components/UserInfo/UserInfo'
+import styles from './Settings.module.scss'
 
 export const Settings: React.FC = () => {
 	return (

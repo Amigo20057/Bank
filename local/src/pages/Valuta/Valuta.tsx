@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import styles from '../module/Valuta.module.scss'
+import styles from './Valuta.module.scss'
 
 export const Valuta: React.FC = () => {
 	const [data, setData] = useState([])
