@@ -4,11 +4,13 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { deleteCard, fetchCard } from '../../redux/slices/card'
+import { AppDispatch } from '../../redux/store'
 import { FormDelete } from '../../types/authTypes'
+import { ICard } from '../../types/cardTypes'
 import styles from './DeleteCard.module.scss'
 
 export const DeleteCard: React.FC = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	const { cards } = useSelector(state => state.cards)
 	const [selectedCard, setSelectedCard] = useState('')
 	const [redirect, setRedirect] = useState(false)
@@ -58,7 +60,7 @@ export const DeleteCard: React.FC = () => {
 						onChange={e => setSelectedCard(e.target.value)}
 					>
 						<option value=''>-- Виберіть карту --</option>
-						{cards.items.map(card => (
+						{cards.items.map((card: ICard) => (
 							<option key={card._id} value={card.card_number}>
 								{card.card_number} (Баланс: {card.balance} $)
 							</option>

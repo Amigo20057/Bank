@@ -8,9 +8,10 @@ import { Commission } from '../../components/Credit/Commission'
 import { CreditForm } from '../../components/Credit/CreditForm'
 import { LoanCalculator } from '../../components/Credit/LoanCalculator'
 import { Term } from '../../components/Credit/Term'
+import { AppDispatch } from '../../redux/store'
 
 export const Credits: React.FC = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	const [commission, setCommission] = useState(2.5)
 	const [money, setMoney] = useState(3000)
 	const [term, setTerm] = useState(12)

@@ -4,10 +4,11 @@ import { useDispatch } from 'react-redux'
 import styles from './Support.module.scss'
 
 import { createReport } from '../../redux/slices/report'
+import { AppDispatch } from '../../redux/store'
 import { IFormSupport } from '../../types/supportTypes'
 
 export const Support: React.FC = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	const { register, handleSubmit, reset } = useForm<IFormSupport>({
 		defaultValues: {
 			fullName: '',

@@ -17,10 +17,11 @@ import {
 	Valuta,
 } from './pages/index.ts'
 import { fetchAuthMe, selectIsAuth } from './redux/slices/auth.ts'
+import { AppDispatch } from './redux/store.ts'
 
 export const App: React.FC = () => {
 	const isAuth: boolean = useSelector(selectIsAuth)
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	const location = useLocation()
 
 	useEffect(() => {

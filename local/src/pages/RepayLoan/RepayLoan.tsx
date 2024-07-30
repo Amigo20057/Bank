@@ -7,10 +7,11 @@ import { fetchCard } from '../../redux/slices/card'
 import { repayLoan } from '../../redux/slices/loan'
 import styles from './RepayLoan.module.scss'
 
+import { AppDispatch } from '../../redux/store'
 import { Card, FormLoan, Loan } from '../../types/repayLoanTypes'
 
 export const RepayLoan: React.FC = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	const { cards } = useSelector(state => state.cards)
 	const [selectedCard, setSelectedCard] = useState('')
 	const [selectedLoan, setSelectedLoan] = useState('')

@@ -9,11 +9,12 @@ import {
 	fetchCard,
 	getMoneyTransfers,
 } from '../../redux/slices/card'
+import { AppDispatch } from '../../redux/store'
 import styles from './Home.module.scss'
 
 export const Home: React.FC = () => {
 	const isAuth: boolean = useSelector(selectIsAuth)
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	const { cards, transfers } = useSelector(state => state.cards)
 	const data = cards.items
 	const transferData = transfers.items

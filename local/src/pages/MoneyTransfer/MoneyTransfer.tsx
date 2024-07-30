@@ -4,11 +4,12 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { fetchCard, moneyTransfer } from '../../redux/slices/card'
+import { AppDispatch } from '../../redux/store'
 import { ITransferMoneyForm } from '../../types/cardTypes'
 import styles from './MoneyTransfer.module.scss'
 
 export const MoneyTransfer: React.FC = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch<AppDispatch>()
 	const { cards } = useSelector(state => state.cards)
 	const [selectedCard, setSelectedCard] = useState('')
 	const [redirect, setRedirect] = useState(false)
